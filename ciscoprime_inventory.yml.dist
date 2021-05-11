@@ -1,0 +1,22 @@
+---
+# For documentation run ANSIBLE_INVENTORY_PLUGINS=. ansible-doc -t inventory ciscoprime
+# Example command line: ansible-inventory -v --list -i ciscoprime_inventory.yml
+# While debugging/testing: ANSIBLE_INVENTORY_PLUGINS=. ansible-inventory -i ciscoprime_inventory.yml --list -vvvvv
+# remember to export env variable CISCOPRIME_USER and CISCOPRIME_PASSWORD
+
+# required parameters
+plugin: ciscoprime
+api_endpoint: https://prime.local/webacs/api/v4
+api_user: ansible # you can fill your token here, but you should rather use environment variable CISCOPRIME_USER
+api_password: ansible_password # you can fill your password here, but you should rather use environment variable CISCOPRIME_PASSWORD
+
+
+# Optional parameters
+api_max_results: 1000 # Cisco Prime pagination parameter, default value is 1000 and it matches Prime default value
+validate_certs: True 
+cache: True # use ansible cache for inventory
+cache_plugin: jsonfile 
+cache_connection: /tmp/ # where to put cache files
+cache_timeout: 86400 #seconds
+timeout: 15 # api timeout
+exclude_unmanaged: True # Exclude from inventory hosts which are marked "unmanaged" in Cisco Prime
